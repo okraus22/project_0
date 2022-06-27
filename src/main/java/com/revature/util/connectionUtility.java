@@ -28,11 +28,12 @@ public class connectionUtility
 		String url = System.getenv("DB_URL");
 		String username = System.getenv("DB_USERNAME");
 		String password = System.getenv("DB_PASSWORD");
+		String schema = System.getenv("DB_SCHEMA");
 		
 		try {
 			conn = DriverManager.getConnection(url, username, password);
 			//System.out.println("Established Connection to Database!");
-			conn.setSchema("Project0");
+			//conn.setSchema("Project0");
 			System.out.println(conn.getSchema());
 			
 		} catch (SQLException e) {

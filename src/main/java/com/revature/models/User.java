@@ -35,6 +35,7 @@ public class User implements Serializable
 		this.password = password;
 		
 		id = generateId();
+		role = Role.customer;
 		
 		System.out.println(id);
 	}

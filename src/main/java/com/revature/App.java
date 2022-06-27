@@ -15,10 +15,15 @@ public class App
 	public static void main(String[] args)
 	{
 		List<Account> accounts = new ArrayList<Account>();
-		User u = new User(548004,"name", "passsword",Role.customer,accounts);
+		int id = "Admin".hashCode()/1000;
+		id = id * 1000;
+		
+		User u = new User(id,"Admin", "Password",Role.admin,accounts);
 		UserDao dao = new UserDao();
-		dao.insert(u);
 		System.out.println(u);
+		
+		
+		//TODO test account dao stuff
 		//connectionUtility.getConnection();
 		
 	}
