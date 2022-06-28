@@ -26,4 +26,6 @@ public interface IAccountDao
 
 	// Delete
 	boolean delete(int id); // Delete the user associated with the ID;
+	
+	boolean deleteJunction(int userId, int accountId);
 }

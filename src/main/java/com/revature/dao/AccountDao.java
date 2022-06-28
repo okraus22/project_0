@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -302,6 +301,32 @@ public class AccountDao implements IAccountDao
 		}
 
 		return temp;
+	}
+
+	@Override
+	public boolean deleteJunction(int userId, int accountId)
+	{
+		String sql = "DELETE FROM user_acount_junct WHERE account_id = ? AND user_id = ? RETURNING true";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(2, userId);
+			stmt.setInt(1, accountId);
+
+			if (stmt.execute())
+			{
+				return true;
+			}
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
+		return false;
 	}
 
 }
