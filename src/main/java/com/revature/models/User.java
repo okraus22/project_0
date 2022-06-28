@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.revature.dao.UserDao;
 
+@SuppressWarnings("serial")
 public class User implements Serializable
 {
 	private int id;

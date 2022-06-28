@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.revature.dao.AccountDao;
 
+@SuppressWarnings("serial")
 public class Account implements Serializable
 {
 	private double balance = 0;
@@ -15,7 +16,7 @@ public class Account implements Serializable
 	public Account()
 	{
 		balance = 0;
-		id = ( int)Math.random()*10000;
+		id = (int) (Math.random()*10000);
 		id *= 1000;
 		AccountDao a = new AccountDao();
 		id += a.getCount();

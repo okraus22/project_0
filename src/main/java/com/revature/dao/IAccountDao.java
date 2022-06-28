@@ -7,7 +7,7 @@ import com.revature.models.User;
 
 public interface IAccountDao
 {
-	boolean insert(Account a); 
+	boolean insert(Account a, int userId); 
 
 	// Read: return 1 or return all
 	Account findById(int id); // Returns user object associated with this id in DB
@@ -15,8 +15,13 @@ public interface IAccountDao
 	List<Account> findAll(); // Return a list of all user objects in the DB;
 
 	int getCount();
+	
+	int getNumUsers();
+	
 	// Update
 	boolean update(Account u); // Updates a user in the DB and return true if successful and false if not
+	
+	boolean addUser(int accountId, int userId);
 	
 	List<Account> findByOwner(int accOwnerId);
 
