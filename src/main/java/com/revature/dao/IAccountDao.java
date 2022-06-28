@@ -3,7 +3,6 @@ package com.revature.dao;
 import java.util.List;
 
 import com.revature.models.Account;
-import com.revature.models.User;
 
 public interface IAccountDao
 {
@@ -16,7 +15,7 @@ public interface IAccountDao
 
 	int getCount();
 	
-	int getNumUsers();
+	int getNumUsers(int id);
 	
 	// Update
 	boolean update(Account u); // Updates a user in the DB and return true if successful and false if not

@@ -38,7 +38,7 @@ public class User implements Serializable
 		id = generateId();
 		role = Role.customer;
 		
-		System.out.println(id);
+		//System.out.println(id);
 	}
 
 	public User(String username, String password, Role role)

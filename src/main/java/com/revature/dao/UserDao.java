@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.User;
@@ -18,7 +19,6 @@ public class UserDao implements IUserDao
 
 	public boolean insert(User u)
 	{
-		
 
 		String sql = "INSERT INTO users (user_id, username, password, role) values (?, ?, ?, ?) RETURNING users.user_id";
 
@@ -45,7 +45,7 @@ public class UserDao implements IUserDao
 		{
 
 			e.printStackTrace();
-			
+
 		}
 
 		return false;
@@ -56,8 +56,8 @@ public class UserDao implements IUserDao
 		User temp = new User();
 
 		String sql = "SELECT * FROM users WHERE user_id = ?";
-		//String sql2 = "SELECT * FROM user_acount_junct WHERE user_id = ?";
-		
+		// String sql2 = "SELECT * FROM user_acount_junct WHERE user_id = ?";
+
 		AccountDao a = new AccountDao();
 		List<Account> accounts;
 		accounts = a.findByOwner(id);
@@ -65,8 +65,6 @@ public class UserDao implements IUserDao
 		try (Connection conn = connectionUtility.getConnection())
 		{
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			
-			
 
 			stmt.setInt(1, id);
 
@@ -75,7 +73,7 @@ public class UserDao implements IUserDao
 			if ((rs = stmt.executeQuery()) != null)
 			{
 				rs.next();
-				
+
 				temp.setId(rs.getInt("user_id"));
 				temp.setUsername(rs.getString("username"));
 				temp.setPassword(rs.getString("password"));
@@ -85,7 +83,7 @@ public class UserDao implements IUserDao
 
 		} catch (SQLException e)
 		{
-			
+
 			e.printStackTrace();
 		}
 
@@ -94,14 +92,90 @@ public class UserDao implements IUserDao
 
 	public User findByUsername(String username)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		User temp = new User();
+
+		String sql = "SELECT * FROM users WHERE username = ?";
+		// String sql2 = "SELECT * FROM user_acount_junct WHERE user_id = ?";
+
+		AccountDao a = new AccountDao();
+		List<Account> accounts;
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, username);
+
+			ResultSet rs;
+
+			if ((rs = stmt.executeQuery()) != null)
+			{
+				rs.next();
+
+				temp.setId(rs.getInt("user_id"));
+				temp.setUsername(rs.getString("username"));
+				temp.setPassword(rs.getString("password"));
+				temp.setRole(Role.valueOf(rs.getString("role")));
+				accounts = a.findByOwner(temp.getId());
+
+				temp.setAccounts(accounts);
+			}
+
+		} catch (SQLException e)
+		{
+
+			e.printStackTrace();
+		}
+
+		return temp;
 	}
 
 	public List<User> findAll()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<User> temp = new ArrayList<User>();
+
+		User u;
+		int id;
+		String username, password;
+		Role role;
+
+		String sql = "SELECT * FROM users";
+		// String sql2 = "SELECT * FROM user_acount_junct WHERE user_id = ?";
+
+		AccountDao a = new AccountDao();
+		List<Account> accounts;
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs;
+
+			if ((rs = stmt.executeQuery(sql)) != null)
+			{
+				while (rs.next())
+				{
+
+					id = rs.getInt("user_id");
+					username = rs.getString("username");
+					password = rs.getString("password");
+					role = Role.valueOf(rs.getString("role"));
+					accounts = a.findByOwner(id);
+
+					u = new User(id, username, password, role, accounts);
+
+					temp.add(u);
+				}
+
+			}
+
+		} catch (SQLException e)
+		{
+
+			e.printStackTrace();
+		}
+
+		return temp;
 	}
 
 	public int getCount()
@@ -123,7 +197,7 @@ public class UserDao implements IUserDao
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
-			
+
 		}
 
 		return temp;
@@ -131,13 +205,53 @@ public class UserDao implements IUserDao
 
 	public boolean update(User u)
 	{
-		// TODO Auto-generated method stub
+
+		String sql = "Update users SET username = ?, password = ?, role = ? WHERE user_id = ? RETURNING username";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, u.getUsername());
+			stmt.setString(2, u.getPassword());
+			stmt.setObject(3, u.getRole(), Types.OTHER);
+			stmt.setInt(4, u.getId());
+
+			if (stmt.execute())
+			{
+				return true;
+			}
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
 		return false;
 	}
 
 	public boolean delete(int id)
 	{
-		// TODO Auto-generated method stub
+		String sql = "DELETE FROM users WHERE user_id = ? RETURNING true";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+
+			if (stmt.execute())
+			{
+				return true;
+			}
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
 		return false;
 	}
 

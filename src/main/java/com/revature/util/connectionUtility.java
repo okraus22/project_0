@@ -34,7 +34,7 @@ public class connectionUtility
 			conn = DriverManager.getConnection(url, username, password);
 			//System.out.println("Established Connection to Database!");
 			//conn.setSchema("Project0");
-			System.out.println(conn.getSchema());
+			//System.out.println(conn.getSchema());
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

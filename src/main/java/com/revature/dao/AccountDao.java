@@ -57,15 +57,71 @@ public class AccountDao implements IAccountDao
 	@Override
 	public Account findById(int id)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Account temp = null;
+		double balance;
+		boolean open;
+
+		String sql = "SELECT * FROM account WHERE account_id = ?";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setInt(1, id);
+
+			ResultSet rs = stmt.executeQuery();
+
+			rs.next();
+			balance = rs.getDouble("balance");
+			open = rs.getBoolean("is_open");
+
+			temp = new Account(balance, id, open);
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
+		return temp;
 	}
 
 	@Override
 	public List<Account> findAll()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Account> temp = new ArrayList<>();
+		double balance;
+		int id;
+		boolean open;
+		Account a;
+
+		String sql = "SELECT * FROM account";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next())
+			{
+				balance = rs.getDouble("balance");
+				open = rs.getBoolean("is_open");
+				id = rs.getInt("account_id");
+				a = new Account(balance, id, open);
+
+				temp.add(a);
+			}
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
+		return temp;
 	}
 
 	@Override
@@ -94,9 +150,29 @@ public class AccountDao implements IAccountDao
 	}
 
 	@Override
-	public boolean update(Account u)
+	public boolean update(Account a)
 	{
-		// TODO Auto-generated method stub
+		String sql = "Update account SET balance = ?, is_open = ? WHERE account_id = ? RETURNING true";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setDouble(1, a.getBalance());
+			stmt.setBoolean(2, a.isOpen());
+			stmt.setInt(3, a.getId());
+
+			if (stmt.execute())
+			{
+				return true;
+			}
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
 		return false;
 	}
 
@@ -148,22 +224,84 @@ public class AccountDao implements IAccountDao
 	@Override
 	public boolean delete(int id)
 	{
-		// TODO Auto-generated method stub
+		String sql = "DELETE FROM account WHERE account_id = ? RETURNING true";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+
+			if (stmt.execute())
+			{
+				return true;
+			}
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
 		return false;
 	}
 
 	@Override
 	public boolean addUser(int accountId, int userId)
 	{
-		// TODO Auto-generated method stub
+		String sql = "INSERT INTO user_acount_junct (user_id, account_id) values (?, ?) returning true";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setInt(1, userId);
+			stmt.setInt(2, accountId);
+
+			// ResultSet rs;
+
+			if (stmt.execute())
+			{
+
+				return true;
+
+			}
+
+		} catch (SQLException e)
+		{
+
+			e.printStackTrace();
+
+		}
+
 		return false;
 	}
 
 	@Override
-	public int getNumUsers()
+	public int getNumUsers(int id)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		int temp = -1;
+
+		String sql = "SELECT count(account_id) FROM user_acount_junct WHERE account_id = ?";
+
+		try (Connection conn = connectionUtility.getConnection())
+		{
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			
+			ResultSet rs = stmt.executeQuery();
+
+			rs.next();
+			temp = rs.getInt(1);
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
+
+		return temp;
 	}
 
 }
