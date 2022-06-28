@@ -1,12 +1,12 @@
 package com.revature.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.log4j.Logger;
 
 import com.revature.dao.IUserDao;
 import com.revature.dao.UserDao;
-import com.revature.models.Account;
 import com.revature.models.Role;
 import com.revature.models.User;
 
@@ -63,7 +63,8 @@ public class UserService
 		
 		System.out.println("Username and Password Do Not Match");
 		logger.info("failed login attempt");
-		return null;
+		throw new RuntimeException();
+		//return null;
 	}
 	
 	
@@ -71,10 +72,11 @@ public class UserService
 	public List<User> getAllUsers()
 	{
 		List<User> temp = uDao.findAll();
-		if(temp == null)
+		if(Objects.isNull(temp))
 		{
 			System.out.println("Failed to Retrieve All Users");
 			logger.info("Failed to Retrieve All Users");
+			throw new RuntimeException();
 		}
 		
 		logger.info("retrieved all user data");
@@ -83,16 +85,40 @@ public class UserService
 	
 	public User checkUser(int id)
 	{
-		//TODO
+		User temp;
+		temp = uDao.findById(id);
 		
-		return null;
+		if(!Objects.isNull(temp))
+		{
+			logger.info("returned user data");
+		}
+		else
+		{
+			System.out.println("Failed to Retrieve User");
+			logger.info("retrieve user data failed");
+			throw new RuntimeException();
+		}
+		
+		return temp;
 	}
 	
 	public User checkUser(String username)
 	{
-		//TODO
+		User temp;
+		temp = uDao.findByUsername(username);
 		
-		return null;
+		if(!Objects.isNull(temp))
+		{
+			logger.info("returned user data");
+		}
+		else
+		{
+			System.out.println("Failed to Retrieve User");
+			logger.info("retrieve user data failed");
+			throw new RuntimeException();
+		}
+		
+		return temp;
 	}
 	
 	
