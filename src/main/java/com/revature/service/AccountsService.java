@@ -33,6 +33,22 @@ public class AccountsService
 
 		return temp;
 	}
+	
+	public static List<Account> getAllAccounts()
+	{
+		List<Account> temp;
+
+		temp = aDao.findAll();
+
+		if (Objects.isNull(temp))
+		{
+			System.out.println("Failed to Retrieve the Accounts");
+			logger.info("attempt to retrieve a useres accounts failed");
+			throw new RuntimeException();
+		}
+
+		return temp;
+	}
 
 	public static boolean withdraw(int userId, int accountId, double amount)
 	{

@@ -12,11 +12,11 @@ import com.revature.models.User;
 
 public class UserService
 {
-	public IUserDao uDao = new UserDao();
+	public static IUserDao uDao = new UserDao();
 	
-	Logger logger = Logger.getLogger(UserService.class);
+	static Logger logger = Logger.getLogger(UserService.class);
 	
-	public User register(String username, String password)
+	public static User register(String username, String password)
 	{
 		
 		User temp = new User(username,password);
@@ -33,7 +33,7 @@ public class UserService
 		throw new RuntimeException();
 	}
 	
-	public User register(String username, String password, Role role)
+	public static User register(String username, String password, Role role)
 	{
 		
 		User temp = new User(username,password, role);
@@ -50,7 +50,7 @@ public class UserService
 		throw new RuntimeException();
 	}
 	
-	public User login(String username, String password)
+	public static User login(String username, String password)
 	{
 		User temp = uDao.findByUsername(username);
 		
@@ -69,7 +69,7 @@ public class UserService
 	
 	
 	
-	public List<User> getAllUsers()
+	public static List<User> getAllUsers()
 	{
 		List<User> temp = uDao.findAll();
 		if(Objects.isNull(temp))
@@ -83,7 +83,7 @@ public class UserService
 		return temp;
 	}
 	
-	public User checkUser(int id)
+	public static User checkUser(int id)
 	{
 		User temp;
 		temp = uDao.findById(id);
@@ -102,7 +102,7 @@ public class UserService
 		return temp;
 	}
 	
-	public User checkUser(String username)
+	public static User checkUser(String username)
 	{
 		User temp;
 		temp = uDao.findByUsername(username);

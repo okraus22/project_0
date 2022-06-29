@@ -1,2 +1,4 @@
 
+ 2022-06-28 22:40:55 INFO  revature.service.UserService:60 - Succseful login
+ 2022-06-28 22:42:37 INFO  revature.service.UserService:60 - Succseful login
  
