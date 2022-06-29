@@ -1,4 +1,174 @@
-
- 2022-06-28 22:40:55 INFO  revature.service.UserService:60 - Succseful login
- 2022-06-28 22:42:37 INFO  revature.service.UserService:60 - Succseful login
+2022-06-29 07:48:08 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 07:48:08 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 07:48:08 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 07:48:08 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 07:48:08 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 07:48:08 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 07:48:08 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 07:48:08 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:48:08 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 07:51:56 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 07:51:56 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 07:51:56 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:51:56 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 07:51:56 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 07:51:56 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 07:51:56 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:51:56 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 07:52:04 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 07:52:04 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 07:52:04 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:52:04 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 07:52:04 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 07:52:04 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 07:52:04 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:52:04 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 07:53:50 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 07:53:50 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 07:53:50 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:142 - Could Not Find Account to Deposit To
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:160 - Tried to Update Account and Failed
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:153 - Tried to Update Account and Failed
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:133 - Could Not Find Account to Withdraw From
+ 2022-06-29 07:53:50 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 07:53:50 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 07:53:50 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 07:53:50 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:53:50 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 07:57:29 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 07:57:29 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 07:57:29 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:142 - Could Not Find Account to Deposit To
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:160 - Tried to Update Account and Failed
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:153 - Tried to Update Account and Failed
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:133 - Could Not Find Account to Withdraw From
+ 2022-06-29 07:57:29 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 07:57:29 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 07:57:29 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 07:57:29 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:57:29 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 07:58:21 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 07:58:21 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 07:58:21 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:142 - Could Not Find Account to Deposit To
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:160 - Tried to Update Account and Failed
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:193 - attempt to Find an account failed
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:153 - Tried to Update Account and Failed
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:133 - Could Not Find Account to Withdraw From
+ 2022-06-29 07:58:21 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 07:58:21 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 07:58:21 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 07:58:21 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 07:58:21 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 08:02:23 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 08:02:23 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 08:02:23 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:142 - Could Not Find Account to Deposit To
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:160 - Tried to Update Account and Failed
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:193 - attempt to Find an account failed
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:153 - Tried to Update Account and Failed
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:133 - Could Not Find Account to Withdraw From
+ 2022-06-29 08:02:23 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 08:02:23 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:208 - attempt to Find an account failed
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 08:02:23 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 08:02:23 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:217 - Tried to Update Account and Failed
+ 2022-06-29 08:02:23 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:82 - Tried to Update Account and Failed
+ 2022-06-29 08:02:30 INFO  revature.service.UserService:99 - retrieve user data failed
+ 2022-06-29 08:02:30 INFO  revature.service.UserService:118 - retrieve user data failed
+ 2022-06-29 08:02:30 INFO  revature.service.UserService:66 - failed login attempt
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:142 - Could Not Find Account to Deposit To
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:58 - Tried to Withdraw a Negative Amount of Money
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:160 - Tried to Update Account and Failed
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:193 - attempt to Find an account failed
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:73 - Tried to Withdraw More Money Than Is In Account
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:153 - Tried to Update Account and Failed
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:30 - attempt to retrieve a useres accounts failed
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:66 - Could Not Find Account to Withdraw
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:133 - Could Not Find Account to Withdraw From
+ 2022-06-29 08:02:30 INFO  revature.service.UserService:79 - Failed to Retrieve All Users
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:111 - Tried to Update Account and Failed
+ 2022-06-29 08:02:30 INFO  revature.service.UserService:94 - returned user data
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:208 - attempt to Find an account failed
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:46 - attempt to retrieve a useres accounts failed
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:102 - Could Not Find Account to Depost
+ 2022-06-29 08:02:30 INFO  revature.service.UserService:83 - retrieved all user data
+ 2022-06-29 08:02:30 INFO  revature.service.UserService:61 - Succseful login
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:123 - Tried to Deposit a Negative Amount of Money
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:217 - Tried to Update Account and Failed
+ 2022-06-29 08:02:30 INFO  revature.service.AccountsService:94 - Tried to Deposit a Negative Amount of Money
  

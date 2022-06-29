@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JDBCDemo</a> &gt; <a href="index.source.html" class="el_package">com.revature.dao</a> &gt; <span class="el_source">UserDao.java</span></div><h1>UserDao.java</h1><pre class="source lang-java linenums">package com.revature.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.revature.models.User;
+import com.revature.util.connectionUtility;
+import com.revature.models.Account;
+import com.revature.models.Role;
+
+<span class="fc" id="L17">public class UserDao implements IUserDao</span>
+{
+
+	public boolean insert(User u)
+	{
+
+<span class="nc" id="L23">		String sql = &quot;INSERT INTO users (user_id, username, password, role) values (?, ?, ?, ?) RETURNING users.user_id&quot;;</span>
+
+<span class="nc" id="L25">		try (Connection conn = connectionUtility.getConnection())</span>
+		{
+<span class="nc" id="L27">			PreparedStatement stmt = conn.prepareStatement(sql);</span>
+
+<span class="nc" id="L29">			stmt.setInt(1, u.getId());</span>
+
+<span class="nc" id="L31">			stmt.setString(2, u.getUsername());</span>
+
+<span class="nc" id="L33">			stmt.setString(3, u.getPassword());</span>
+
+<span class="nc" id="L35">			stmt.setObject(4, u.getRole(), Types.OTHER);</span>
+
+			// ResultSet rs;
+
+<span class="nc bnc" id="L39" title="All 2 branches missed.">			if ((stmt.executeQuery()) != null)</span>
+			{
+<span class="nc" id="L41">				return true;</span>
+			}
+
+<span class="nc" id="L44">		} catch (SQLException e)</span>
+		{
+
+<span class="nc" id="L47">			e.printStackTrace();</span>
+
+<span class="nc" id="L49">		}</span>
+
+<span class="nc" id="L51">		return false;</span>
+	}
+
+	public User findById(int id)
+	{
+<span class="nc" id="L56">		User temp = new User();</span>
+
+<span class="nc" id="L58">		String sql = &quot;SELECT * FROM users WHERE user_id = ?&quot;;</span>
+		// String sql2 = &quot;SELECT * FROM user_acount_junct WHERE user_id = ?&quot;;
+
+<span class="nc" id="L61">		AccountDao a = new AccountDao();</span>
+		List&lt;Account&gt; accounts;
+<span class="nc" id="L63">		accounts = a.findByOwner(id);</span>
+
+<span class="nc" id="L65">		try (Connection conn = connectionUtility.getConnection())</span>
+		{
+<span class="nc" id="L67">			PreparedStatement stmt = conn.prepareStatement(sql);</span>
+
+<span class="nc" id="L69">			stmt.setInt(1, id);</span>
+
+			ResultSet rs;
+
+<span class="nc bnc" id="L73" title="All 2 branches missed.">			if ((rs = stmt.executeQuery()) != null)</span>
+			{
+<span class="nc" id="L75">				rs.next();</span>
+
+<span class="nc" id="L77">				temp.setId(rs.getInt(&quot;user_id&quot;));</span>
+<span class="nc" id="L78">				temp.setUsername(rs.getString(&quot;username&quot;));</span>
+<span class="nc" id="L79">				temp.setPassword(rs.getString(&quot;password&quot;));</span>
+<span class="nc" id="L80">				temp.setRole(Role.valueOf(rs.getString(&quot;role&quot;)));</span>
+<span class="nc" id="L81">				temp.setAccounts(accounts);</span>
+			}
+
+<span class="nc" id="L84">		} catch (SQLException e)</span>
+		{
+
+<span class="nc" id="L87">			e.printStackTrace();</span>
+<span class="nc" id="L88">		}</span>
+
+<span class="nc" id="L90">		return temp;</span>
+	}
+
+	public User findByUsername(String username)
+	{
+<span class="nc" id="L95">		User temp = new User();</span>
+
+<span class="nc" id="L97">		String sql = &quot;SELECT * FROM users WHERE username = ?&quot;;</span>
+		// String sql2 = &quot;SELECT * FROM user_acount_junct WHERE user_id = ?&quot;;
+
+<span class="nc" id="L100">		AccountDao a = new AccountDao();</span>
+		List&lt;Account&gt; accounts;
+
+<span class="nc" id="L103">		try (Connection conn = connectionUtility.getConnection())</span>
+		{
+<span class="nc" id="L105">			PreparedStatement stmt = conn.prepareStatement(sql);</span>
+
+<span class="nc" id="L107">			stmt.setString(1, username);</span>
+
+			ResultSet rs;
+
+<span class="nc bnc" id="L111" title="All 2 branches missed.">			if ((rs = stmt.executeQuery()) != null)</span>
+			{
+<span class="nc" id="L113">				rs.next();</span>
+
+<span class="nc" id="L115">				temp.setId(rs.getInt(&quot;user_id&quot;));</span>
+<span class="nc" id="L116">				temp.setUsername(rs.getString(&quot;username&quot;));</span>
+<span class="nc" id="L117">				temp.setPassword(rs.getString(&quot;password&quot;));</span>
+<span class="nc" id="L118">				temp.setRole(Role.valueOf(rs.getString(&quot;role&quot;)));</span>
+<span class="nc" id="L119">				accounts = a.findByOwner(temp.getId());</span>
+
+<span class="nc" id="L121">				temp.setAccounts(accounts);</span>
+			}
+
+<span class="nc" id="L124">		} catch (SQLException e)</span>
+		{
+
+<span class="nc" id="L127">			e.printStackTrace();</span>
+<span class="nc" id="L128">		}</span>
+
+<span class="nc" id="L130">		return temp;</span>
+	}
+
+	public List&lt;User&gt; findAll()
+	{
+<span class="nc" id="L135">		List&lt;User&gt; temp = new ArrayList&lt;User&gt;();</span>
+
+		User u;
+		int id;
+		String username, password;
+		Role role;
+
+<span class="nc" id="L142">		String sql = &quot;SELECT * FROM users&quot;;</span>
+		// String sql2 = &quot;SELECT * FROM user_acount_junct WHERE user_id = ?&quot;;
+
+<span class="nc" id="L145">		AccountDao a = new AccountDao();</span>
+		List&lt;Account&gt; accounts;
+
+<span class="nc" id="L148">		try (Connection conn = connectionUtility.getConnection())</span>
+		{
+<span class="nc" id="L150">			Statement stmt = conn.createStatement();</span>
+
+			ResultSet rs;
+
+<span class="nc bnc" id="L154" title="All 2 branches missed.">			if ((rs = stmt.executeQuery(sql)) != null)</span>
+			{
+<span class="nc bnc" id="L156" title="All 2 branches missed.">				while (rs.next())</span>
+				{
+
+<span class="nc" id="L159">					id = rs.getInt(&quot;user_id&quot;);</span>
+<span class="nc" id="L160">					username = rs.getString(&quot;username&quot;);</span>
+<span class="nc" id="L161">					password = rs.getString(&quot;password&quot;);</span>
+<span class="nc" id="L162">					role = Role.valueOf(rs.getString(&quot;role&quot;));</span>
+<span class="nc" id="L163">					accounts = a.findByOwner(id);</span>
+
+<span class="nc" id="L165">					u = new User(id, username, password, role, accounts);</span>
+
+<span class="nc" id="L167">					temp.add(u);</span>
+				}
+
+			}
+
+<span class="nc" id="L172">		} catch (SQLException e)</span>
+		{
+
+<span class="nc" id="L175">			e.printStackTrace();</span>
+<span class="nc" id="L176">		}</span>
+
+<span class="nc" id="L178">		return temp;</span>
+	}
+
+	public int getCount()
+	{
+
+<span class="nc" id="L184">		int temp = -1;</span>
+
+<span class="nc" id="L186">		String sql = &quot;SELECT count(user_id) FROM users&quot;;</span>
+
+<span class="nc" id="L188">		try (Connection conn = connectionUtility.getConnection())</span>
+		{
+
+<span class="nc" id="L191">			Statement stmt = conn.createStatement();</span>
+<span class="nc" id="L192">			ResultSet rs = stmt.executeQuery(sql);</span>
+
+<span class="nc" id="L194">			rs.next();</span>
+<span class="nc" id="L195">			temp = rs.getInt(1);</span>
+
+<span class="nc" id="L197">		} catch (SQLException e)</span>
+		{
+<span class="nc" id="L199">			e.printStackTrace();</span>
+
+<span class="nc" id="L201">		}</span>
+
+<span class="nc" id="L203">		return temp;</span>
+	}
+
+	public boolean update(User u)
+	{
+
+<span class="nc" id="L209">		String sql = &quot;Update users SET username = ?, password = ?, role = ? WHERE user_id = ? RETURNING username&quot;;</span>
+
+<span class="nc" id="L211">		try (Connection conn = connectionUtility.getConnection())</span>
+		{
+
+<span class="nc" id="L214">			PreparedStatement stmt = conn.prepareStatement(sql);</span>
+<span class="nc" id="L215">			stmt.setString(1, u.getUsername());</span>
+<span class="nc" id="L216">			stmt.setString(2, u.getPassword());</span>
+<span class="nc" id="L217">			stmt.setObject(3, u.getRole(), Types.OTHER);</span>
+<span class="nc" id="L218">			stmt.setInt(4, u.getId());</span>
+
+<span class="nc bnc" id="L220" title="All 2 branches missed.">			if (stmt.execute())</span>
+			{
+<span class="nc" id="L222">				return true;</span>
+			}
+
+<span class="nc" id="L225">		} catch (SQLException e)</span>
+		{
+<span class="nc" id="L227">			e.printStackTrace();</span>
+
+<span class="nc" id="L229">		}</span>
+
+<span class="nc" id="L231">		return false;</span>
+	}
+
+	public boolean delete(int id)
+	{
+<span class="nc" id="L236">		String sql = &quot;DELETE FROM users WHERE user_id = ? RETURNING true&quot;;</span>
+
+<span class="nc" id="L238">		try (Connection conn = connectionUtility.getConnection())</span>
+		{
+
+<span class="nc" id="L241">			PreparedStatement stmt = conn.prepareStatement(sql);</span>
+<span class="nc" id="L242">			stmt.setInt(1, id);</span>
+
+<span class="nc bnc" id="L244" title="All 2 branches missed.">			if (stmt.execute())</span>
+			{
+<span class="nc" id="L246">				return true;</span>
+			}
+
+<span class="nc" id="L249">		} catch (SQLException e)</span>
+		{
+<span class="nc" id="L251">			e.printStackTrace();</span>
+
+<span class="nc" id="L253">		}</span>
+
+<span class="nc" id="L255">		return false;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.security.PublicKey;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class UserService
 	public static User register(String username, String password)
 	{
 		
-		User temp = new User(username,password);
+		 User temp = new User(username,password);
 		
 		
 		if(uDao.insert(temp))

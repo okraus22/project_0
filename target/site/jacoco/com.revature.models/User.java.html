@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JDBCDemo</a> &gt; <a href="index.source.html" class="el_package">com.revature.models</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package com.revature.models;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.revature.dao.UserDao;
+
+@SuppressWarnings(&quot;serial&quot;)
+public class User implements Serializable
+{
+	private int id;
+	private String username;
+	private String password;
+	private Role role;
+	private List&lt;Account&gt; accounts;
+	
+	public User()
+<span class="fc" id="L18">	{</span>
+		
+<span class="fc" id="L20">	}</span>
+
+	public User(int id, String username, String password, Role role, List&lt;Account&gt; accounts)
+	{
+<span class="nc" id="L24">		super();</span>
+<span class="nc" id="L25">		this.id = id;</span>
+<span class="nc" id="L26">		this.username = username;</span>
+<span class="nc" id="L27">		this.password = password;</span>
+<span class="nc" id="L28">		this.role = role;</span>
+<span class="nc" id="L29">		this.accounts = accounts;</span>
+<span class="nc" id="L30">	}</span>
+
+	public User(String username, String password)
+	{
+<span class="nc" id="L34">		super();</span>
+<span class="nc" id="L35">		this.username = username;</span>
+<span class="nc" id="L36">		this.password = password;</span>
+		
+<span class="nc" id="L38">		id = generateId();</span>
+<span class="nc" id="L39">		role = Role.customer;</span>
+		
+		//System.out.println(id);
+<span class="nc" id="L42">	}</span>
+
+	public User(String username, String password, Role role)
+	{
+<span class="nc" id="L46">		super();</span>
+<span class="nc" id="L47">		this.username = username;</span>
+<span class="nc" id="L48">		this.password = password;</span>
+<span class="nc" id="L49">		this.role = role;</span>
+		
+<span class="nc" id="L51">		id = generateId();</span>
+<span class="nc" id="L52">	}</span>
+	
+	public int getId()
+	{
+<span class="nc" id="L56">		return id;</span>
+	}
+
+	public void setId(int id)
+	{
+<span class="nc" id="L61">		this.id = id;</span>
+<span class="nc" id="L62">	}</span>
+
+	public String getUsername()
+	{
+<span class="nc" id="L66">		return username;</span>
+	}
+
+	public void setUsername(String username)
+	{
+<span class="fc" id="L71">		this.username = username;</span>
+<span class="fc" id="L72">	}</span>
+
+	public String getPassword()
+	{
+<span class="fc" id="L76">		return password;</span>
+	}
+
+	public void setPassword(String password)
+	{
+<span class="fc" id="L81">		this.password = password;</span>
+<span class="fc" id="L82">	}</span>
+
+	public Role getRole()
+	{
+<span class="nc" id="L86">		return role;</span>
+	}
+
+	public void setRole(Role role)
+	{
+<span class="nc" id="L91">		this.role = role;</span>
+<span class="nc" id="L92">	}</span>
+
+	public List&lt;Account&gt; getAccounts()
+	{
+<span class="nc" id="L96">		return accounts;</span>
+	}
+
+	public void setAccounts(List&lt;Account&gt; accounts)
+	{
+<span class="fc" id="L101">		this.accounts = accounts;</span>
+<span class="fc" id="L102">	}</span>
+
+	@Override
+	public String toString()
+	{
+<span class="nc" id="L107">		return &quot;User [id=&quot; + id + &quot;, username=&quot; + username + &quot;, password=&quot; + password + &quot;, role=&quot; + role + &quot;, accounts=&quot;</span>
+				+ accounts + &quot;]&quot;;
+	}
+
+	@Override
+	public int hashCode()
+	{
+<span class="nc" id="L114">		final int prime = 31;</span>
+<span class="nc" id="L115">		int result = 1;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">		result = prime * result + ((accounts == null) ? 0 : accounts.hashCode());</span>
+<span class="nc" id="L117">		result = prime * result + id;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">		result = prime * result + ((password == null) ? 0 : password.hashCode());</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">		result = prime * result + ((role == null) ? 0 : role.hashCode());</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">		result = prime * result + ((username == null) ? 0 : username.hashCode());</span>
+<span class="nc" id="L121">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">		if (this == obj)</span>
+<span class="fc" id="L128">			return true;</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L130">			return false;</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L132">			return false;</span>
+<span class="nc" id="L133">		User other = (User) obj;</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">		if (accounts == null)</span>
+		{
+<span class="nc bnc" id="L136" title="All 2 branches missed.">			if (other.accounts != null)</span>
+<span class="nc" id="L137">				return false;</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">		} else if (!accounts.equals(other.accounts))</span>
+<span class="nc" id="L139">			return false;</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">		if (id != other.id)</span>
+<span class="nc" id="L141">			return false;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">		if (password == null)</span>
+		{
+<span class="nc bnc" id="L144" title="All 2 branches missed.">			if (other.password != null)</span>
+<span class="nc" id="L145">				return false;</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">		} else if (!password.equals(other.password))</span>
+<span class="nc" id="L147">			return false;</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">		if (role != other.role)</span>
+<span class="nc" id="L149">			return false;</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">		if (username == null)</span>
+		{
+<span class="nc bnc" id="L152" title="All 2 branches missed.">			if (other.username != null)</span>
+<span class="nc" id="L153">				return false;</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">		} else if (!username.equals(other.username))</span>
+<span class="nc" id="L155">			return false;</span>
+<span class="nc" id="L156">		return true;</span>
+	}
+
+	private int generateId()
+	{
+<span class="nc" id="L161">		UserDao u = new UserDao();</span>
+		int id;
+		
+<span class="nc" id="L164">		int hash = username.hashCode();</span>
+<span class="nc" id="L165">		hash /=1000;</span>
+<span class="nc" id="L166">		hash*=1000;</span>
+		
+<span class="nc" id="L168">		id = hash + u.getCount();</span>
+		
+		
+<span class="nc" id="L171">		return id;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

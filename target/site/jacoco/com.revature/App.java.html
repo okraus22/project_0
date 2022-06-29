@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JDBCDemo</a> &gt; <a href="index.source.html" class="el_package">com.revature</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package com.revature;
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+
+import com.revature.dao.AccountDao;
+import com.revature.dao.UserDao;
+import com.revature.models.Account;
+import com.revature.models.Role;
+import com.revature.models.User;
+import com.revature.service.AccountsService;
+import com.revature.service.UserService;
+import com.revature.util.connectionUtility;
+
+@SuppressWarnings(&quot;unused&quot;)
+<span class="nc" id="L18">public class App</span>
+{
+	Scanner scan;
+
+	public static void main(String[] args)
+	{
+<span class="nc" id="L24">		App app = new App();</span>
+
+<span class="nc" id="L26">		app.run();</span>
+
+<span class="nc" id="L28">	}</span>
+
+	public void run()
+	{
+<span class="nc" id="L32">		scan = new Scanner(System.in);</span>
+
+<span class="nc" id="L34">		User u = login();</span>
+		Account a;
+
+<span class="nc" id="L37">		boolean shouldLoop = true;</span>
+		int input;
+		Double dubInput;
+		String sInput;
+
+<span class="nc bnc" id="L42" title="All 2 branches missed.">		while (shouldLoop)</span>
+		{
+<span class="nc" id="L44">			System.out.println(&quot;What Would You Like to Do?&quot;);</span>
+
+<span class="nc" id="L46">			System.out.println(&quot;View Your Status: 1\nApply to Open an Account: 2&quot;);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">			if (!u.getAccounts().isEmpty())</span>
+			{
+<span class="nc" id="L49">				System.out.println(&quot;Withdraw From One of Your Accounts: 3&quot;);</span>
+
+<span class="nc" id="L51">				System.out.println(&quot;Deposit to One of Your Accounts: 4&quot;);</span>
+
+<span class="nc" id="L53">				System.out.println(&quot;Tranfer From One of Your Accounts to Another Account: 5&quot;);</span>
+			}
+
+<span class="nc bnc" id="L56" title="All 4 branches missed.">			if (u.getRole() == Role.employee || u.getRole() == Role.admin)</span>
+			{
+<span class="nc" id="L58">				System.out.println(</span>
+						&quot;Veiw A Users Info: 6\nView All Users Info: 7\nView An Account: 8\nView All Accounts: 9&quot;);
+			}
+
+<span class="nc bnc" id="L62" title="All 2 branches missed.">			if (u.getRole() == Role.admin)</span>
+			{
+<span class="nc" id="L64">				System.out.println(&quot;Approve, Deny, Or Cancel an Account: 10&quot;);</span>
+<span class="nc" id="L65">				System.out.println(&quot;Withdraw From Any Account: 11&quot;);</span>
+
+<span class="nc" id="L67">				System.out.println(&quot;Deposit to Any Account: 12&quot;);</span>
+
+<span class="nc" id="L69">				System.out.println(&quot;Tranfer From Any Account to Another Account: 13&quot;);</span>
+			}
+
+			try
+			{
+<span class="nc" id="L74">				input = scan.nextInt();</span>
+
+<span class="nc" id="L76">			} catch (InputMismatchException e)</span>
+			{
+<span class="nc" id="L78">				System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L79">				continue;</span>
+<span class="nc" id="L80">			}</span>
+
+<span class="nc bnc" id="L82" title="All 15 branches missed.">			switch (input)</span>
+			{
+			case 1:
+<span class="nc" id="L85">				System.out.println(u);</span>
+
+<span class="nc" id="L87">				break;</span>
+			case 2:
+
+<span class="nc" id="L90">				System.out.println(&quot;Your New Account Number Is: &quot; + AccountsService.openAccount(u.getId()));</span>
+<span class="nc" id="L91">				u.setAccounts(AccountsService.getUserAccounts(u.getId()));</span>
+
+<span class="nc" id="L93">				break;</span>
+			case 3:
+<span class="nc" id="L95">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Withdraw From Or -1 to cancel&quot;);
+<span class="nc bnc" id="L97" title="All 2 branches missed.">				for (int i = 0; i &lt; u.getAccounts().size(); i++)</span>
+				{
+<span class="nc" id="L99">					System.out.println(u.getAccounts().get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L106">						input = scan.nextInt();</span>
+
+<span class="nc" id="L108">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L110">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L111">						continue;</span>
+<span class="nc" id="L112">					}</span>
+<span class="nc bnc" id="L113" title="All 4 branches missed.">					if (input &gt;= -1 &amp;&amp; input &lt; u.getAccounts().size())</span>
+<span class="nc" id="L114">						break;</span>
+<span class="nc" id="L115">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Withdraw From Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L117" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L118">					break;</span>
+<span class="nc" id="L119">				System.out.println(&quot;Please Enter the amount you would like to withdraw&quot;);</span>
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L124">						dubInput = scan.nextDouble();</span>
+
+<span class="nc" id="L126">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L128">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L129">						continue;</span>
+<span class="nc" id="L130">					}</span>
+						break;
+				}
+				try
+				{
+<span class="nc" id="L135">					AccountsService.withdraw(u.getId(), u.getAccounts().get(input).getId(), dubInput);</span>
+<span class="nc" id="L136">				} catch (Exception e)</span>
+				{
+					// TODO: handle exception
+<span class="nc" id="L139">				}</span>
+				
+<span class="nc" id="L141">				break;</span>
+			case 4:
+<span class="nc" id="L143">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Deposit To Or -1 to cancel&quot;);
+<span class="nc bnc" id="L145" title="All 2 branches missed.">				for (int i = 0; i &lt; u.getAccounts().size(); i++)</span>
+				{
+<span class="nc" id="L147">					System.out.println(u.getAccounts().get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L154">						input = scan.nextInt();</span>
+
+<span class="nc" id="L156">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L158">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L159">						continue;</span>
+<span class="nc" id="L160">					}</span>
+<span class="nc bnc" id="L161" title="All 4 branches missed.">					if (input &gt;= -1 &amp;&amp; input &lt; u.getAccounts().size())</span>
+<span class="nc" id="L162">						break;</span>
+<span class="nc" id="L163">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Deposit To Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L165" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L166">					break;</span>
+<span class="nc" id="L167">				System.out.println(&quot;Please Enter the amount you would like to deposit&quot;);</span>
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L172">						dubInput = scan.nextDouble();</span>
+
+<span class="nc" id="L174">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L176">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L177">						continue;</span>
+<span class="nc" id="L178">					}</span>
+						break;
+				}
+				try
+				{
+<span class="nc" id="L183">					AccountsService.deposit(u.getId(), u.getAccounts().get(input).getId(), dubInput);</span>
+<span class="nc" id="L184">				} catch (Exception e)</span>
+				{
+					// TODO: handle exception
+<span class="nc" id="L187">				}</span>
+				
+<span class="nc" id="L189">				break;</span>
+			case 5:
+<span class="nc" id="L191">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Transfer From Or -1 to cancel&quot;);
+<span class="nc bnc" id="L193" title="All 2 branches missed.">				for (int i = 0; i &lt; u.getAccounts().size(); i++)</span>
+				{
+<span class="nc" id="L195">					System.out.println(u.getAccounts().get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L202">						input = scan.nextInt();</span>
+
+<span class="nc" id="L204">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L206">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L207">						continue;</span>
+<span class="nc" id="L208">					}</span>
+<span class="nc bnc" id="L209" title="All 4 branches missed.">					if (input &gt;= -1 &amp;&amp; input &lt; u.getAccounts().size())</span>
+<span class="nc" id="L210">						break;</span>
+<span class="nc" id="L211">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Transfer From Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L213" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L214">					break;</span>
+<span class="nc" id="L215">				System.out.println(&quot;Please Enter the amount you would like to Transfer&quot;);</span>
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L220">						dubInput = scan.nextDouble();</span>
+
+<span class="nc" id="L222">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L224">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L225">						continue;</span>
+<span class="nc" id="L226">					}</span>
+						break;
+				}
+				
+				int input2;
+				
+<span class="nc" id="L232">				System.out.println(</span>
+						&quot;Please Input the Account number of the Account You Would Like To Transfer into Or -1 to cancel&quot;);
+				
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L239">						input2 = scan.nextInt();</span>
+
+<span class="nc" id="L241">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L243">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L244">						continue;</span>
+<span class="nc" id="L245">					}</span>
+					break;
+				}
+<span class="nc bnc" id="L248" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L249">					break;</span>
+				try
+				{
+<span class="nc" id="L252">					AccountsService.transfer(u.getId(), u.getAccounts().get(input).getId(), input2, dubInput);</span>
+<span class="nc" id="L253">				} catch (Exception e)</span>
+				{
+					// TODO: handle exception
+<span class="nc" id="L256">				}</span>
+				
+<span class="nc" id="L258">				break;</span>
+			case 6:
+<span class="nc bnc" id="L260" title="All 4 branches missed.">				if(!(u.getRole()==Role.employee ||u.getRole() == Role.admin))</span>
+				{
+<span class="nc" id="L262">					break;</span>
+				}
+<span class="nc" id="L264">				System.out.println(&quot;Input the username of the User you would like to view&quot;);</span>
+<span class="nc" id="L265">				sInput = scan.next();</span>
+<span class="nc" id="L266">				System.out.println(UserService.checkUser(sInput));</span>
+<span class="nc" id="L267">				break;</span>
+			case 7:
+<span class="nc bnc" id="L269" title="All 4 branches missed.">				if(!(u.getRole()==Role.employee ||u.getRole() == Role.admin))</span>
+				{
+<span class="nc" id="L271">					break;</span>
+				}
+<span class="nc" id="L273">				List&lt;User&gt; userList = UserService.getAllUsers();</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">				for (User user : userList)</span>
+				{
+<span class="nc" id="L276">					System.out.println(user);</span>
+<span class="nc" id="L277">				}</span>
+<span class="nc" id="L278">				break;</span>
+			case 8:
+<span class="nc bnc" id="L280" title="All 4 branches missed.">				if(!(u.getRole()==Role.employee ||u.getRole() == Role.admin))</span>
+				{
+<span class="nc" id="L282">					break;</span>
+				}
+<span class="nc" id="L284">				System.out.println(&quot;Input the id of the account you would like to view&quot;);</span>
+<span class="nc" id="L285">				input = scan.nextInt();</span>
+<span class="nc" id="L286">				System.out.println(AccountsService.checkAccount(input));</span>
+<span class="nc" id="L287">				break;</span>
+			case 9:
+<span class="nc bnc" id="L289" title="All 4 branches missed.">				if(!(u.getRole()==Role.employee ||u.getRole() == Role.admin))</span>
+				{
+<span class="nc" id="L291">					break;</span>
+				}
+<span class="nc" id="L293">				List&lt;Account&gt; accountList = AccountsService.getAllAccounts();</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">				for (Account account : accountList)</span>
+				{
+<span class="nc" id="L296">					System.out.println(account);</span>
+<span class="nc" id="L297">				}</span>
+<span class="nc" id="L298">				break;</span>
+			case 10:
+<span class="nc bnc" id="L300" title="All 2 branches missed.">				if(u.getRole() != Role.admin)</span>
+				{
+<span class="nc" id="L302">					break;</span>
+				}
+<span class="nc" id="L304">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Modify To Or -1 to cancel&quot;);
+<span class="nc" id="L306">				accountList = AccountsService.getAllAccounts();</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">				for (int i = 0; i &lt; accountList.size(); i++)</span>
+				{
+<span class="nc" id="L309">					System.out.println(accountList.get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L316">						input = scan.nextInt();</span>
+
+<span class="nc" id="L318">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L320">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L321">						continue;</span>
+<span class="nc" id="L322">					}</span>
+<span class="nc bnc" id="L323" title="All 4 branches missed.">					if (input &gt;= -1 &amp;&amp; input &lt; u.getAccounts().size())</span>
+<span class="nc" id="L324">						break;</span>
+<span class="nc" id="L325">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Modify To Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L327" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L328">					break;</span>
+<span class="nc" id="L329">				System.out.println(&quot;Would You like To approve or deny the account?\napprove: 1\ndeny: 2&quot;);</span>
+<span class="nc" id="L330">				input2 = scan.nextInt();</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">				if(input2 == 1)</span>
+				{
+<span class="nc" id="L333">					AccountsService.setAccountOpen(input, true);</span>
+				}
+				else
+				{
+<span class="nc" id="L337">					AccountsService.setAccountOpen(input, false);</span>
+				}
+				
+<span class="nc" id="L340">				break;</span>
+			case 11:
+<span class="nc bnc" id="L342" title="All 2 branches missed.">				if(u.getRole() != Role.admin)</span>
+				{
+<span class="nc" id="L344">					break;</span>
+				}
+<span class="nc" id="L346">				accountList = AccountsService.getAllAccounts();</span>
+<span class="nc" id="L347">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Withdraw From Or -1 to cancel&quot;);
+<span class="nc bnc" id="L349" title="All 2 branches missed.">				for (int i = 0; i &lt; accountList.size(); i++)</span>
+				{
+<span class="nc" id="L351">					System.out.println(accountList.get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L358">						input = scan.nextInt();</span>
+
+<span class="nc" id="L360">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L362">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L363">						continue;</span>
+<span class="nc" id="L364">					}</span>
+<span class="nc bnc" id="L365" title="All 4 branches missed.">					if (input &gt;= -1 &amp;&amp; input &lt;accountList.size())</span>
+<span class="nc" id="L366">						break;</span>
+<span class="nc" id="L367">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Withdraw From Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L369" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L370">					break;</span>
+<span class="nc" id="L371">				System.out.println(&quot;Please Enter the amount you would like to withdraw&quot;);</span>
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L376">						dubInput = scan.nextDouble();</span>
+
+<span class="nc" id="L378">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L380">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L381">						continue;</span>
+<span class="nc" id="L382">					}</span>
+						break;
+				}
+				try
+				{
+<span class="nc" id="L387">					AccountsService.withdraw(u.getId(), accountList.get(input).getId(), dubInput);</span>
+<span class="nc" id="L388">				} catch (Exception e)</span>
+				{
+					// TODO: handle exception
+<span class="nc" id="L391">				}</span>
+				
+<span class="nc" id="L393">				break;</span>
+			case 12:
+<span class="nc bnc" id="L395" title="All 2 branches missed.">				if(u.getRole() != Role.admin)</span>
+				{
+<span class="nc" id="L397">					break;</span>
+				}
+<span class="nc" id="L399">				accountList = AccountsService.getAllAccounts();</span>
+<span class="nc" id="L400">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Deposit To Or -1 to cancel&quot;);
+<span class="nc bnc" id="L402" title="All 2 branches missed.">				for (int i = 0; i &lt; accountList.size(); i++)</span>
+				{
+<span class="nc" id="L404">					System.out.println(accountList.get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L411">						input = scan.nextInt();</span>
+
+<span class="nc" id="L413">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L415">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L416">						continue;</span>
+<span class="nc" id="L417">					}</span>
+<span class="nc bnc" id="L418" title="All 4 branches missed.">					if (input &gt;= -1 &amp;&amp; input &lt; accountList.size())</span>
+<span class="nc" id="L419">						break;</span>
+<span class="nc" id="L420">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Deposit To Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L422" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L423">					break;</span>
+<span class="nc" id="L424">				System.out.println(&quot;Please Enter the amount you would like to deposit&quot;);</span>
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L429">						dubInput = scan.nextDouble();</span>
+
+<span class="nc" id="L431">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L433">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L434">						continue;</span>
+<span class="nc" id="L435">					}</span>
+						break;
+				}
+				try
+				{
+<span class="nc" id="L440">					AccountsService.deposit(u.getId(), accountList.get(input).getId(), dubInput);</span>
+<span class="nc" id="L441">				} catch (Exception e)</span>
+				{
+					// TODO: handle exception
+<span class="nc" id="L444">				}</span>
+				
+<span class="nc" id="L446">				break;</span>
+			case 13:
+<span class="nc bnc" id="L448" title="All 2 branches missed.">				if(u.getRole() != Role.admin)</span>
+				{
+<span class="nc" id="L450">					break;</span>
+				}
+<span class="nc" id="L452">				accountList = AccountsService.getAllAccounts();</span>
+				
+<span class="nc" id="L454">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Transfer From Or -1 to cancel&quot;);
+<span class="nc bnc" id="L456" title="All 2 branches missed.">				for (int i = 0; i &lt; accountList.size(); i++)</span>
+				{
+<span class="nc" id="L458">					System.out.println(accountList.get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L465">						input = scan.nextInt();</span>
+
+<span class="nc" id="L467">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L469">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L470">						continue;</span>
+<span class="nc" id="L471">					}</span>
+<span class="nc bnc" id="L472" title="All 4 branches missed.">					if (input &gt;= -1 &amp;&amp; input &lt; accountList.size())</span>
+<span class="nc" id="L473">						break;</span>
+<span class="nc" id="L474">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Transfer From Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L476" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L477">					break;</span>
+<span class="nc" id="L478">				System.out.println(&quot;Please Enter the amount you would like to Transfer&quot;);</span>
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L483">						dubInput = scan.nextDouble();</span>
+
+<span class="nc" id="L485">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L487">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L488">						continue;</span>
+<span class="nc" id="L489">					}</span>
+						break;
+				}
+				
+				
+<span class="nc" id="L494">				System.out.println(</span>
+						&quot;Please Input the Number Corrosponding to the Account You Would Like To Transfer From Or -1 to cancel&quot;);
+<span class="nc bnc" id="L496" title="All 2 branches missed.">				for (int i = 0; i &lt; accountList.size(); i++)</span>
+				{
+<span class="nc" id="L498">					System.out.println(accountList.get(i) + &quot;: &quot; + i);</span>
+
+				}
+				while (true)
+				{
+					try
+					{
+<span class="nc" id="L505">						input2 = scan.nextInt();</span>
+
+<span class="nc" id="L507">					} catch (InputMismatchException e)</span>
+					{
+<span class="nc" id="L509">						System.out.println(&quot;Input a number&quot;);</span>
+<span class="nc" id="L510">						continue;</span>
+<span class="nc" id="L511">					}</span>
+<span class="nc bnc" id="L512" title="All 4 branches missed.">					if (input2 &gt;= -1 &amp;&amp; input2 &lt; accountList.size())</span>
+<span class="nc" id="L513">						break;</span>
+<span class="nc" id="L514">					System.out.println(&quot;Please Input the Number Corrosponding to the Account You Would Like To Transfer From Or -1 to cancel&quot;);</span>
+				}
+<span class="nc bnc" id="L516" title="All 2 branches missed.">				if(input == -1)</span>
+<span class="nc" id="L517">					break;</span>
+				try
+				{
+<span class="nc" id="L520">					AccountsService.transfer(u.getId(), accountList.get(input).getId(), accountList.get(input2).getId(), dubInput);</span>
+<span class="nc" id="L521">				} catch (Exception e)</span>
+				{
+					// TODO: handle exception
+<span class="nc" id="L524">				}</span>
+				
+<span class="nc" id="L526">				break;</span>
+
+			case -1:
+<span class="nc" id="L529">				scan.close();</span>
+<span class="nc" id="L530">				System.exit(0);</span>
+<span class="nc" id="L531">				break;</span>
+
+			default:
+<span class="nc" id="L534">				System.out.println(&quot;Please Input a Valid Option&quot;);</span>
+<span class="nc" id="L535">				break;</span>
+			}
+		}
+
+<span class="nc" id="L539">	}</span>
+
+	public User login()
+	{
+<span class="nc" id="L543">		User u = null;</span>
+
+<span class="nc" id="L545">		System.out.println(&quot;Would You like to Login or Register For an Account?&quot;);</span>
+
+<span class="nc" id="L547">		boolean shouldLoop = true;</span>
+		int input;
+
+<span class="nc bnc" id="L550" title="All 2 branches missed.">		while (shouldLoop)</span>
+		{
+<span class="nc" id="L552">			System.out.println(&quot;Login: 1 \nRegister For an Account: 2 \nQuit the Program: -1&quot;);</span>
+			try
+			{
+<span class="nc" id="L555">				input = scan.nextInt();</span>
+
+<span class="nc" id="L557">			} catch (InputMismatchException e)</span>
+			{
+<span class="nc" id="L559">				System.out.println(&quot;Input a Number&quot;);</span>
+<span class="nc" id="L560">				continue;</span>
+<span class="nc" id="L561">			}</span>
+
+<span class="nc bnc" id="L563" title="All 4 branches missed.">			switch (input)</span>
+			{
+			case 1:
+<span class="nc" id="L566">				System.out.println(&quot;Please Enter Your Username&quot;);</span>
+
+<span class="nc" id="L568">				String username = scan.next();</span>
+
+<span class="nc" id="L570">				System.out.println(&quot;Please Enter Your Password&quot;);</span>
+
+<span class="nc" id="L572">				String password = scan.next();</span>
+
+				try
+				{
+<span class="nc" id="L576">					u = UserService.login(username, password);</span>
+<span class="nc" id="L577">					shouldLoop = false;</span>
+
+<span class="nc" id="L579">				} catch (Exception e)</span>
+				{
+
+<span class="nc" id="L582">				}</span>
+
+<span class="nc" id="L584">				break;</span>
+			case 2:
+<span class="nc" id="L586">				System.out.println(&quot;Please Enter a Username&quot;);</span>
+
+<span class="nc" id="L588">				username = scan.next();</span>
+
+<span class="nc" id="L590">				System.out.println(&quot;Please Enter a Password&quot;);</span>
+
+<span class="nc" id="L592">				password = scan.next();</span>
+
+				try
+				{
+<span class="nc" id="L596">					u = UserService.register(username, password);</span>
+<span class="nc" id="L597">					shouldLoop = false;</span>
+
+<span class="nc" id="L599">				} catch (Exception e)</span>
+				{
+
+<span class="nc" id="L602">				}</span>
+
+<span class="nc" id="L604">				break;</span>
+			case -1:
+<span class="nc" id="L606">				scan.close();</span>
+<span class="nc" id="L607">				System.exit(0);</span>
+<span class="nc" id="L608">				break;</span>
+
+			default:
+<span class="nc" id="L611">				System.out.println(&quot;Please Input a Valid Option&quot;);</span>
+<span class="nc" id="L612">				break;</span>
+			}
+
+		}
+
+<span class="nc" id="L617">		return u;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

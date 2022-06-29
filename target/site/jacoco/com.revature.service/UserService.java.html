@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JDBCDemo</a> &gt; <a href="index.source.html" class="el_package">com.revature.service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.revature.service;
+
+import java.security.PublicKey;
+import java.util.List;
+import java.util.Objects;
+
+import org.apache.log4j.Logger;
+
+import com.revature.dao.IUserDao;
+import com.revature.dao.UserDao;
+import com.revature.models.Role;
+import com.revature.models.User;
+
+<span class="nc" id="L14">public class UserService</span>
+{
+<span class="fc" id="L16">	public static IUserDao uDao = new UserDao();</span>
+	
+<span class="fc" id="L18">	static Logger logger = Logger.getLogger(UserService.class);</span>
+	
+	public static User register(String username, String password)
+	{
+		
+<span class="nc" id="L23">		 User temp = new User(username,password);</span>
+		
+		
+<span class="nc bnc" id="L26" title="All 2 branches missed.">		if(uDao.insert(temp))</span>
+		{
+<span class="nc" id="L28">			System.out.println(&quot;Succesfully Registered New User\nYour User ID is: &quot; + temp.getId());</span>
+<span class="nc" id="L29">			logger.info(&quot;succesful registration&quot;);</span>
+<span class="nc" id="L30">			return temp;</span>
+		}
+<span class="nc" id="L32">		System.out.println(&quot;User Registration Failed&quot;);</span>
+<span class="nc" id="L33">		logger.info(&quot;failed registration&quot;);</span>
+<span class="nc" id="L34">		throw new RuntimeException();</span>
+	}
+	
+	public static User register(String username, String password, Role role)
+	{
+		
+<span class="nc" id="L40">		User temp = new User(username,password, role);</span>
+		
+		
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		if(uDao.insert(temp))</span>
+		{
+<span class="nc" id="L45">			System.out.println(&quot;Succesfully Registered New User\nYour User ID is: &quot; + temp.getId());</span>
+<span class="nc" id="L46">			logger.info(&quot;succesful registration&quot;);</span>
+<span class="nc" id="L47">			return temp;</span>
+		}
+<span class="nc" id="L49">		System.out.println(&quot;User Registration Failed&quot;);</span>
+<span class="nc" id="L50">		logger.info(&quot;failed registration&quot;);</span>
+<span class="nc" id="L51">		throw new RuntimeException();</span>
+	}
+	
+	public static User login(String username, String password)
+	{
+<span class="fc" id="L56">		User temp = uDao.findByUsername(username);</span>
+		
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		if(temp.getPassword().equals(password))</span>
+		{
+<span class="fc" id="L60">			System.out.println(&quot;Login Succesful&quot;);</span>
+<span class="fc" id="L61">			logger.info(&quot;Succseful login&quot;);</span>
+<span class="fc" id="L62">			return temp;</span>
+		}
+		
+<span class="fc" id="L65">		System.out.println(&quot;Username and Password Do Not Match&quot;);</span>
+<span class="fc" id="L66">		logger.info(&quot;failed login attempt&quot;);</span>
+<span class="fc" id="L67">		throw new RuntimeException();</span>
+		//return null;
+	}
+	
+	
+	
+	public static List&lt;User&gt; getAllUsers()
+	{
+<span class="fc" id="L75">		List&lt;User&gt; temp = uDao.findAll();</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		if(Objects.isNull(temp))</span>
+		{
+<span class="fc" id="L78">			System.out.println(&quot;Failed to Retrieve All Users&quot;);</span>
+<span class="fc" id="L79">			logger.info(&quot;Failed to Retrieve All Users&quot;);</span>
+<span class="fc" id="L80">			throw new RuntimeException();</span>
+		}
+		
+<span class="fc" id="L83">		logger.info(&quot;retrieved all user data&quot;);</span>
+<span class="fc" id="L84">		return temp;</span>
+	}
+	
+	public static User checkUser(int id)
+	{
+		User temp;
+<span class="fc" id="L90">		temp = uDao.findById(id);</span>
+		
+<span class="fc bfc" id="L92" title="All 2 branches covered.">		if(!Objects.isNull(temp))</span>
+		{
+<span class="fc" id="L94">			logger.info(&quot;returned user data&quot;);</span>
+<span class="fc" id="L95">		}</span>
+		else
+		{
+<span class="fc" id="L98">			System.out.println(&quot;Failed to Retrieve User&quot;);</span>
+<span class="fc" id="L99">			logger.info(&quot;retrieve user data failed&quot;);</span>
+<span class="fc" id="L100">			throw new RuntimeException();</span>
+		}
+		
+<span class="fc" id="L103">		return temp;</span>
+	}
+	
+	public static User checkUser(String username)
+	{
+		User temp;
+<span class="fc" id="L109">		temp = uDao.findByUsername(username);</span>
+		
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">		if(!Objects.isNull(temp))</span>
+		{
+<span class="nc" id="L113">			logger.info(&quot;returned user data&quot;);</span>
+<span class="nc" id="L114">		}</span>
+		else
+		{
+<span class="fc" id="L117">			System.out.println(&quot;Failed to Retrieve User&quot;);</span>
+<span class="fc" id="L118">			logger.info(&quot;retrieve user data failed&quot;);</span>
+<span class="fc" id="L119">			throw new RuntimeException();</span>
+		}
+		
+<span class="nc" id="L122">		return temp;</span>
+	}
+	
+	
+	
+	
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

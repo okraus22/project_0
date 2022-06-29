@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>connectionUtility.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JDBCDemo</a> &gt; <a href="index.source.html" class="el_package">com.revature.util</a> &gt; <span class="el_source">connectionUtility.java</span></div><h1>connectionUtility.java</h1><pre class="source lang-java linenums">package com.revature.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class connectionUtility
+{
+<span class="fc" id="L9">	private static Connection conn = null;</span>
+	
+	private connectionUtility() { }
+	
+	public static Connection getConnection()
+	{
+		
+		try
+		{
+<span class="pc bpc" id="L18" title="3 of 4 branches missed.">			if (conn != null &amp;&amp; !conn.isClosed()) {</span>
+				//System.out.println(&quot;Using a previously made connection&quot;);
+<span class="nc" id="L20">				return conn;</span>
+			}
+<span class="nc" id="L22">		} catch (SQLException e)</span>
+		{
+<span class="nc" id="L24">			e.printStackTrace();</span>
+<span class="nc" id="L25">			return null;</span>
+<span class="fc" id="L26">		}</span>
+		
+<span class="fc" id="L28">		String url = System.getenv(&quot;DB_URL&quot;);</span>
+<span class="fc" id="L29">		String username = System.getenv(&quot;DB_USERNAME&quot;);</span>
+<span class="fc" id="L30">		String password = System.getenv(&quot;DB_PASSWORD&quot;);</span>
+		//String schema = System.getenv(&quot;DB_SCHEMA&quot;);
+		
+		try {
+<span class="nc" id="L34">			conn = DriverManager.getConnection(url, username, password);</span>
+			//System.out.println(&quot;Established Connection to Database!&quot;);
+			//conn.setSchema(schema);
+			//System.out.println(conn.getSchema());
+			
+<span class="fc" id="L39">		} catch (SQLException e) {</span>
+			// TODO Auto-generated catch block
+			//System.out.println(&quot;Cannot establish connection&quot;);
+<span class="fc" id="L42">			e.printStackTrace();</span>
+<span class="nc" id="L43">		}</span>
+		
+		
+		
+<span class="fc" id="L47">		return conn;</span>
+	}
+	
+}
+	
+	
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
