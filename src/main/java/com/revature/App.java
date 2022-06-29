@@ -263,7 +263,14 @@ public class App
 				}
 				System.out.println("Input the username of the User you would like to view");
 				sInput = scan.next();
-				System.out.println(UserService.checkUser(sInput));
+				try
+				{
+					System.out.println(UserService.checkUser(sInput));
+				} catch (Exception e)
+				{
+					// TODO: handle exception
+				}
+				
 				break;
 			case 7:
 				if(!(u.getRole()==Role.employee ||u.getRole() == Role.admin))
@@ -283,7 +290,14 @@ public class App
 				}
 				System.out.println("Input the id of the account you would like to view");
 				input = scan.nextInt();
-				System.out.println(AccountsService.checkAccount(input));
+				try
+				{
+					System.out.println(AccountsService.checkAccount(input));
+				} catch (Exception e)
+				{
+					// TODO: handle exception
+				}
+				
 				break;
 			case 9:
 				if(!(u.getRole()==Role.employee ||u.getRole() == Role.admin))
@@ -320,7 +334,7 @@ public class App
 						System.out.println("Input a number");
 						continue;
 					}
-					if (input >= -1 && input < u.getAccounts().size())
+					if (input >= -1 && input < accountList.size())
 						break;
 					System.out.println("Please Input the Number Corrosponding to the Account You Would Like To Modify To Or -1 to cancel");
 				}
@@ -330,11 +344,11 @@ public class App
 				input2 = scan.nextInt();
 				if(input2 == 1)
 				{
-					AccountsService.setAccountOpen(input, true);
+					AccountsService.setAccountOpen(accountList.get(input).getId(), true);
 				}
 				else
 				{
-					AccountsService.setAccountOpen(input, false);
+					AccountsService.setAccountOpen(accountList.get(input).getId(), false);
 				}
 				
 				break;

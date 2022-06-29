@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.revature.models.Account;
 import com.revature.util.connectionUtility;
@@ -70,6 +71,10 @@ public class AccountDao implements IAccountDao
 			stmt.setInt(1, id);
 
 			ResultSet rs = stmt.executeQuery();
+			if(Objects.isNull(rs))
+			{
+				return null;
+			}
 
 			rs.next();
 			balance = rs.getDouble("balance");

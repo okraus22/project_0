@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.dao.UserDao;
@@ -37,6 +38,7 @@ public class User implements Serializable
 		
 		id = generateId();
 		role = Role.customer;
+		accounts = new ArrayList<>();
 		
 		//System.out.println(id);
 	}
@@ -49,6 +51,7 @@ public class User implements Serializable
 		this.role = role;
 		
 		id = generateId();
+		accounts = new ArrayList<>();
 	}
 	
 	public int getId()
